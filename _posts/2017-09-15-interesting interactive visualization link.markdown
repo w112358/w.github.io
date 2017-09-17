@@ -6,7 +6,7 @@ date:   2017-09-15 20:54:13 -0700
 
 [histography](http://histography.io/)
 
-**histography** is a timeline that visualizing every moment in history.
+**histography** is a timeline that visualizes every moment in history.
 We can find more details in an article from Fast Co Design:
 
 *If every moment in human history was a single steel ball, Histography is like an 4-D Newton’s Cradle, visualizing how all of these events bump up and knock up against each other on a 14-billion-year time frame. It’s beautifully hypnotic—and impressively, it’s all sourced from Wikipedia, which means that it keeps on updating itself.
