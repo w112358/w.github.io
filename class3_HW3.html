@@ -20,14 +20,14 @@
     function picture(){
       element = document.getElementById("image");
       if(element.src.match("1")){
+        element.src = "img/2.jpeg";
+      }
+      else if(element.src.match("2")){
         element.src = "img/3.jpeg";
       }
-      else if(element.src.match("3")){
-        element.src = "img/1.jpeg";
-      }
-/*      else{
+      else{
         element.src = "img/1.jepg";
-      }   */
+      }
     }
    </script>
 
