@@ -1,0 +1,39 @@
+<!DocTYPE HTML>
+
+<html>
+
+ <head>
+   <meta charset = "utf-8" />
+   <h1 >Homework_3</h1>
+ </head>
+
+ <body>
+   <script>
+/*    var id = 1;
+    function picture(){
+      id = (id + 1) % 4;
+      document.getElementId("image").src = './img' + id + '.jpeg';
+      console.log(id);
+    }
+    */
+
+    function picture(){
+      element = document.getElementById("image");
+      if(element.src.match("1")){
+        element.src = "img/3.jpeg";
+      }
+      else if(element.src.match("3")){
+        element.src = "img/1.jpeg";
+      }
+/*      else{
+        element.src = "img/1.jepg";
+      }   */
+    }
+   </script>
+
+   <img id = "image" onclick = "picture()" src = "img/1.jpeg">
+ </body>
+
+
+
+</html>

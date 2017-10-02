@@ -3,12 +3,12 @@ layout: default
 title: testpage
 ---
    <h1>
-   <p>hello nature!</p>
+   <p id = title >hello nature!</p>
    </h1>
    <p>wolf</p>
    <a href = "http://www.google.com">Click here to go to Google</a>
 
-   <a href = "contect.html">Contact me</a>
+   <a href = "contect.html" id = redParagraph >Contact me</a>
    <div>div</div>span<span> first span </span><span>span??</span>
 
    <p style = "color: red; font-size: 32px;"> mi </p>
@@ -17,3 +17,47 @@ title: testpage
 
    <svg> <rect x="50px" y="100px" width="90px" height="100px" fill="red"/>
    <circle cx="50px" cy="100px" r="10px" fill="grey"/> </svg>
+
+
+   <script>
+  var myNumber = 43;
+    myNumber = myNumber *3;
+    console.log(myNumber);
+    console.log(123)
+
+    var mood = "terrible!"
+    console.log(mood);
+
+    var me = "female" + " " +mood;
+    console.log("Who am I" + " " + me);
+
+  if(myNumber > 20){
+      console.log("big");}
+      else{
+        console.log("small");
+      };
+
+
+   var myArray = [1,2,3,4];
+   console.log(myArray);
+
+var user = {
+     "name": "wzq",
+   };
+    console.log(user.name);
+
+  var sayhello = function(){
+    console.log("hello");
+  }
+
+  sayhello();
+
+  var square = function(number){
+    return number*number;
+  }
+  x = square(4);
+  console.log(x);
+
+document.getElementById("title").innerHTML = "hello wolf";
+
+   </script>
