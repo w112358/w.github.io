@@ -1,0 +1,72 @@
+<!DocTYPE HTML>
+
+<!--
+<script src = "class4_num.js"></script>
+
+<script>
+
+ console.log(numbers.plus10(25));
+
+</script>
+-->
+
+<svg id = "mysvg" width = "1000" height = "1000">
+
+<!--  <circle cx = "50" cy = "50" r = "10" class = "dot" />
+  <circle cx = "100" cy = "50" r = "10" class = "dot" />
+  <circle cx = "150" cy = "50" r = "10" class = "dot" />
+-->
+</svg>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+var mydata = [25, 5, 17, 40, 10]
+
+function draw(dataarray){
+var svg = d3.select("#mysvg")
+            .attr("width", window.innerwidth)
+            .attr("height", window.innerheight);
+/*
+   d3.selectAll(".dot")
+  .data(mydata)
+  .attr("r", function(datapoint){
+    return datapoint;
+  })
+  .attr("fill", "red");
+
+*/
+
+
+
+
+var circles = svg.selectAll(".dot").data(dataarray);
+
+circles.exit()
+       .transition().duration(5000)
+       .attr("r", 0)
+/*       .remove()
+       .attr("fill", "red");
+*/
+
+var enterCircles = circles.enter().append("circle")
+      .attr("r", 0)
+      .attr("cy", "50")
+      .attr("cx", function(d,j){
+        return 50*(j+1);
+      })
+      .attr("class", "dot");
+
+
+
+circles.merge(enterCircles)
+       .transition().duration(5000)
+       .attr("r", function(d){
+         return d;
+       })
+       .attr("fill", "orange");
+}
+
+draw([7,27,57,77])
+
+</script>

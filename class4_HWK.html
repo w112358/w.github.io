@@ -1,0 +1,94 @@
+
+---
+layout: default
+title: assignment4
+---
+
+
+<html>
+
+<body>
+
+<svg id = "mysvg" width = "2000px" height = "300px">
+<!--
+<circle cx = "50" cy = "50" r = "0" class = "dot" />
+<circle cx = "100" cy = "50" r = "0" class = "dot" />
+-->
+</svg>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+var mydata = []
+var click_b = 0
+var click_s = 0
+
+function draw(dropclick){
+
+switch(dropclick){
+//  case 0: mydata = [15]; break;
+  case 1: mydata.push(15); break;
+  case 2: mydata.push(5); break;
+  case 3: click_b = click_b + 1; break;
+  case 4: click_s = click_s + 1; break;
+}
+
+var svg = d3.select("#mysvg");
+        /*  .attr("width", window.innerwidth)
+            .attr("height", window.innerheight);   */
+
+var circles = svg.selectAll(".dot").data(mydata);
+
+circles.exit()
+       .transition().duration(5000)
+       .attr("r", 0);
+
+var enterCircles = circles.enter().append("circle")
+      .attr("r", 0)
+      .attr("cy", "50")
+  /*    .attr("cx", function(d,i){
+        return 50*(i+1);
+      })     */
+      .attr("cy", function(d){
+        return(Math.random()*250)
+      })
+       .attr("cx", function(d){
+        return(Math.random()*500)
+      })
+      .attr("class", "dot");
+
+circles.merge(enterCircles)
+       .transition()
+       .duration(3000)
+       .ease(d3.easeBounce)
+       .attr("r", function(d){
+         if(dropclick == 3){
+           return d+3*click_b
+         }
+         if(dropclick == 4){
+           return d-3*click_s
+         }
+         return d + 5*Math.random()
+       })
+    /*    .attr("cy", function(d){
+            return(Math.random()*250)
+       })
+        .attr("cx", function(d){
+            return(Math.random()*500)
+       })        */
+       .attr("fill", "pink");
+}
+
+</script>
+
+<button id = "drop" onclick = "draw(1)">add a big circle</button>
+<button id = "drop" onclick = "draw(2)">add a small circle</button>
+
+<button id = "drop" onclick = "draw(3)">bigger circle</button>
+<button id = "drop" onclick = "draw(4)">smaller circle</button>
+
+
+</body>
+
+</html>
