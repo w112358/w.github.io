@@ -55,21 +55,24 @@
         return pokes, types;
       })
       */
-    var margin = 200;
+    var margin1 = 200;
+    var margin2 = 50;
     var mysvg = d3.select("#mysvg")
-                  .attr("width", window.innerWidth - 2*margin)
-                  .attr("height", window.innerHeight- 2*margin)
+                  .attr("width", window.innerWidth - 2*margin1)
+                  .attr("height", window.innerHeight- 2*margin2)
                   .style("background-color", "black")
                   .attr("opacity", "1")
-                  .attr("transform", "translate(" + margin + ", " + margin + ")");
+                  .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
 
-
+    var width_svg = + mysvg.attr("width"),
+        height_svg = + mysvg.attr("height"),
+        margin_svg = 50;
 
     var first = d3.select("#first")
-                .attr("width", "900")
-                .attr("height", "900")
-                .attr("transform", "translate("+ window.innerWidth/4 +", "+ margin/2 +")");
-;
+                .attr("width", width_svg - margin_svg*2)
+                .attr("height", height_svg - margin_svg*2)
+                .attr("transform", "translate("+ margin_svg +", "+ margin_svg +")");
+
 
     var width = + first.attr("width"),
         height = + first.attr("height"),
@@ -114,38 +117,45 @@
       var stack = d3.stack()
                     .keys(["num_pure", "num_npure"]);
 
+    /*  var pie = d3.pie()
+                  .value(function(d){
+                    return d.
+                  })   */
+
       console.log(stack(types));
 
       console.log(types.columns.slice(1,-24));
 
-    first.append("g")
-         .selectAll("g")
-         .data(stack(types))
-         .enter().append("g")
-         .attr("fill", function(d){
-           return o_color(d.key);
-         })
-         .selectAll("path")
-         .data(function(d){
-           return d;
-         })
-         .enter().append("path")
-         .attr("d", d3.arc()
-                      .innerRadius(function(d){
-                        return o_radial(d[0]);
-                      })
-                      .outerRadius(function(d){
-                        return o_radial(d[1]);
-                      })
-                      .startAngle(function(d){
-                        return o_band(d.data.type);
-                      })
-                      .endAngle(function(d){
-                        return o_band(d.data.type) + o_band.bandwidth();
-                      })
-                      .padAngle(0.01)
-                      .padRadius(o_inner_radius)
-               );
+      first.append("g")
+           .selectAll("g")
+           .data(stack(types))
+           .enter().append("g")
+           .attr("fill", function(d){
+             return o_color(d.key);
+           })
+           .selectAll("path")
+           .data(function(d){
+             return d;
+           })
+           .enter().append("path")
+           .attr("d", d3.arc()
+                        .innerRadius(function(d){
+                          return o_radial(d[0]);
+                        })
+                        .outerRadius(function(d){
+                          return o_radial(d[1]);
+                        })
+                        .startAngle(function(d){
+                          return o_band(d.data.type);
+                        })
+                        .endAngle(function(d){
+                          return o_band(d.data.type) + o_band.bandwidth();
+                        })
+                        .padAngle(0.05)
+                        .padRadius(o_inner_radius)
+
+                 );
+
 
 
       var label = first.append("g")
@@ -186,7 +196,7 @@
             .attr("fill", "none")
             .attr("stroke", "#fff")
             .attr("stroke-width", 2);
-
+/*
       first.selectAll("g")
            .on("mouseover", function(d){
               d3.select("path")
@@ -195,32 +205,7 @@
             .on("mouseout", function(d){
               d3.select("path")
                 .attr("fill", "#7b6888");
-            })
-  /*    y_tick.append("text")
-            .attr("x", -6)
-            .attr("y", function(d) { return -o_radial(d); })
-            .attr("dy", "0.35em")
-            .text(o_radial.tickFormat(10, "s"));
-
-/*
-
-
-       var legend = g.append("g")
-         .selectAll("g")
-         .data(data.columns.slice(1).reverse())
-         .enter().append("g")
-           .attr("transform", function(d, i) { return "translate(-40," + (i - (data.columns.length - 1) / 2) * 20 + ")"; });
-
-       legend.append("rect")
-           .attr("width", 18)
-           .attr("height", 18)
-           .attr("fill", z);
-
-       legend.append("text")
-           .attr("x", 24)
-           .attr("y", 9)
-           .attr("dy", "0.35em")
-           .text(function(d) { return d; });     */
+            })   */
 
     })
 
