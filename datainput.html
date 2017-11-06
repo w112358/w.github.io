@@ -83,13 +83,14 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
 
-    var margin = 200;
+    var margin1 = 200;
+    var margin2 = 50
     d3.select("#mysvg")
-      .attr("width", window.innerWidth - 2*margin)
-      .attr("height", window.innerHeight - 2*margin)
+      .attr("width", window.innerWidth - 2*margin1)
+      .attr("height", window.innerHeight - 2*margin2)
       .style("background-color", "white")
       .attr("opacity", "0.7")
-      .attr("transform", "translate(" + margin + ", " + margin + ")");
+      .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
 
 /*  d3.csv("Pokemon_less.csv", function(error, data){
       console.log(data);
