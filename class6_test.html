@@ -22,19 +22,19 @@ var margin = 50;
 //   .attr("height", window.innerHeight - margin*2)
 //   .attr("transform",  "translate(" + margin + "," + margin + ")");
 
-var data = [0.2, 2.4, 4.7, 3.1];
+var type = [0.2, 2.4, 4.7, 3.1];
 
 var xScale = d3.scaleLinear()
 //  or     .domain(d3.extent(data))
-               .domain([d3.min(data), d3.max(data)]) //your data put in
+               .domain([d3.min(type), d3.max(type)]) //your data put in
                .range([margin, window.innerWidth - margin]); //the data returns in scale
 
 var yScale = d3.scaleLinear()
-               .domain([0, data.length-1])
+               .domain([0, type.length-1])
                .range([margin, window.innerHeight - margin])
 
 var circles = svg.selectAll("circle")
-                 .data(data);
+                 .data(type);
 
 
 
