@@ -76,7 +76,7 @@
 
     var width = + first.attr("width"),
         height = + first.attr("height"),
-        o_inner_radius = 250,
+        o_inner_radius = 180,
         o_outer_radius = Math.min(width/2, height/2);
 
     var first = first.append("g")
@@ -151,7 +151,7 @@
                         .endAngle(function(d){
                           return o_band(d.data.type) + o_band.bandwidth();
                         })
-                        .padAngle(0.05)
+                        .padAngle(0.01)
                         .padRadius(o_inner_radius)
 
                  );
