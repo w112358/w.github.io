@@ -6,19 +6,22 @@
     <title>Poke</title>
     <style>
 
-    body{
-      background-color: rgb(0, 0, 0);
+/*    body{
+      margin: 0;
+      background-color: black;
+      background-image: url("img/b1.jpg");
+      background-attachment: fixed;
     }
-
+*/
 
     </style>
   </head>
 
   <body>
 
-    <svg id="mysvg"></svg>
-    <svg id="first"></svg>
-
+    <svg id="mysvg">
+      <svg id="first"></svg>
+    </svg>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="d3-scale-radial.js"></script>
 
@@ -52,19 +55,20 @@
         return pokes, types;
       })
       */
-/*    var margin = 50;
+    var margin = 200;
     var mysvg = d3.select("#mysvg")
                   .attr("width", window.innerWidth - 2*margin)
-                  .attr("height", "800")
-                  .attr("class", "background")
+                  .attr("height", window.innerHeight- 2*margin)
+                  .style("background-color", "black")
+                  .attr("opacity", "1")
                   .attr("transform", "translate(" + margin + ", " + margin + ")");
-*/
+
 
 
     var first = d3.select("#first")
                 .attr("width", "900")
                 .attr("height", "900")
-                .attr("transform", "translate("+ window.innerWidth/4 +", "+ window.innerHeight/4 +")");
+                .attr("transform", "translate("+ window.innerWidth/4 +", "+ margin/2 +")");
 ;
 
     var width = + first.attr("width"),
