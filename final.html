@@ -186,7 +186,8 @@
             .attr("fill", "none")
             .attr("stroke", "#fff")
             .attr("stroke-opacity", "0.8")
-            .attr("r", o_radial);
+            .attr("r", o_radial)
+            .attr("opacity", 0.5);
 
       y_tick.append("text")
             .text(o_radial.tickFormat(10, "s"))
@@ -195,7 +196,8 @@
             .attr("dy", "0.35em")
             .attr("fill", "none")
             .attr("stroke", "#fff")
-            .attr("stroke-width", 2);
+            .attr("stroke-width", 2)
+            .attr("opacity", 0.5);
 /*
       first.selectAll("g")
            .on("mouseover", function(d){
