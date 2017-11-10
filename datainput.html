@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="final-style.css">
-    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail" rel="stylesheet">
     <title>Poke</title>
 
   </head>
@@ -26,16 +26,123 @@
         <li class = "nav_left"><a href = "https://bulbapedia.bulbagarden.net/wiki/Main_Page">More</a></li>
       </ul>
 
-    <div id = "title_loc"></div>
-      <div id = "title">
+    <div class = "title_loc"></div>
+      <div class = "title">
         <div class = "title_text">Poke & data</div>
       </div>
     </header>
 
-    <div id = "main">
-    <svg id="mysvg"></svg>
+    <div id = "main" class = "main_content">
+      <div class = "main_part">
+        <div class = "main_title">Generations</div>
+
+        <div class = "main_text">
+          <p>
+            All of the licensed Pokémon properties overseen by The Pokémon Company International
+            are divided roughly by generation. These generations are roughly
+            chronological divisions by release; every several years, when an
+            official sequel in the main RPG series is released that features new Pokémon,
+            characters, and gameplay concepts, that sequel is considered the start of a new
+            generation of the franchise.
+          </p>
+        <div>
+
+        <div class = "row">
+          <div class = "column_side">
+            <ul class = "gene_body">
+              <li class = "gene_button"><span>G1 Red & Green</span></li>
+              <li class = "gene_button"><span>G2 Gold & Silver</span></li>
+              <li class = "gene_button"><span>G3 Ruby & Sapphire</span></li>
+              <li class = "gene_button"><span>G4 Diamond & Pearl</span></li>
+              <li class = "gene_button"><span>G5 Black & White</span></li>
+              <li class = "gene_button"><span>G6 X & Y</span></li>
+              <li class = "gene_button"><span>G7 Sun & Moon</span></li>
+            </ul>
+          </div>
+
+          <div class = "column_middle">
+
+          </div>
+        </div>
+      </div>
+
+      <div class = "main_space"></div>
+
+      <div class = "main_part">
+        <div class = "main_title">types</div>
+
+        <div class = "main_text">
+          <p>
+            Types are properties for Pokémon and their moves. As of Generation
+            VI, there are 18 types. Most of these were introduced during Generation I,
+            but the Dark and Steel types were introduced in Generation II and the
+            Fairy type was introduced in Generation VI.
+          </p>
+          <p>
+            A move has exactly one type. The type of a damaging move typically
+            defines which types of Pokémon it is super effective against, which
+            types of Pokémon it is not very effective against, and which types
+            of Pokémon it is completely ineffective against.
+          </p>
+        <div>
+
+        <div class = "row">
+          <div class = "column_side">
+            <ul class = "gene_body">
+              <li class = "gene_button"><span>G1 Red & Green</span></li>
+              <li class = "gene_button"><span>G2 Gold & Silver</span></li>
+              <li class = "gene_button"><span>G3 Ruby & Sapphire</span></li>
+
+            </ul>
+          </div>
+
+          <div class = "column_middle">
+
+          </div>
+        </div>
+      </div>
+
+      <div class = "main_space"></div>
+
+      <div class = "main_part">
+        <div class = "main_title">Pokedex</div>
+
+        <div class = "main_text">
+          <p>
+            Every Pokémon creature has an array of stats.
+            HP (Hit Points) is a Pokémon's life force. The Speed stat decides which
+            Pokémon will make the first move in battle. Attack and Special Attack
+            measure the strength of moves used by your Pokémon; the higher this is,
+            the more damage you will do to opponents. Attack corresponds to moves in
+            the Physical category, while Special Attack corresponds to Special moves.
+            Similarly, Defense and Special Defense measure the ability to take attacks
+            from other Pokémon; the higher the stat is, the fewer Hit Points will be
+            lost when attacked. Defense correspnds to moves in the Physical category,
+            while Special Defense corresponds to Special moves.
+          </p>
+        <div>
+
+        <div class = "row">
+          <div class = "column_side">
+
+          </div>
+
+          <div class = "column_middle">
+
+          </div>
+        </div>
+      </div>
+
     </div>
 
+    <div class = "footer_loc"></div>
+
+    <footer>
+      <div class= "footer_text">
+        <p>Pokemon & Data</p>
+      </div>
+    </footer>
+    <!--    <svg id="mysvg"></svg>   -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
 
@@ -44,8 +151,7 @@
     d3.select("#mysvg")
       .attr("width", window.innerWidth - 2*margin1)
       .attr("height", window.innerHeight - 2*margin2)
-      .style("background-color", "white")
-      .attr("opacity", "0.3")
+      .style("background-color", "black")
       .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
 
 /*  d3.csv("Pokemon_less.csv", function(error, data){
