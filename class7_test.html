@@ -1,0 +1,62 @@
+<!DocTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>World Map</title>
+
+</head>
+
+
+<body>
+  <svg id = "svg"></svg>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+  <script>
+
+
+  d3.json("world_map.json", function(error,data){
+    if(error)throw error;
+
+    var geoJSON = topojson.feature(data, data.objects.countries);
+
+
+    var proj = d3.geoMercator()
+                 .fitSize([window.innerWidth, window.innerHeight], geoJSON);
+
+    var path = d3.geoPath()
+                 .projection(proj);
+
+    var svg = d3.select("#svg")
+                .attr("width", window.innerWidth)
+                .attr("height", window.innerHeight);
+
+    var countries = svg.selectAll("path")
+                      .data(geoJSON.features);
+
+    countries.enter().append("path")
+             .attr("d", function(d){
+               return path(d);
+             })
+             .attr("fill", "grey");
+
+    var points = [
+      {"name": "Boston", "coords": [-71.0589, 42.3601]},
+      {"name": "London", "coords": [-0.1278, 51.5074]}
+    ];
+
+    var points = svg.selectAll("circle")
+                    .data(points);
+
+    points.enter().append("circle")
+          .attr("transform", function(d){
+             return "translate("+ proj(d.coords) +")";
+           })
+          .attr("r", 3)
+          .attr("fill", "red");
+
+  })
+
+  </script>
+</body>
+</html>

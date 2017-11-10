@@ -4,92 +4,47 @@
 
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="final-style.css">
     <title>Poke</title>
-    <style>
-
-    body{
-      margin: 0;
-      background-color: black;
-      background-image: url("img/b1.jpg");
-      background-attachment: fixed;
-    }
-/*    * {
-    box-sizing: border-box;
-    }
-
-    body{
-      margin: 0;
-    }
-
-    .header{
-      background-color: grey;
-      padding: 30px;
-      opacity:0.8;
-      text-align: center;
-    }
-
-    .column{
-      float: left;
-      padding: 10px;
-    }
-
-    .column.side {
-    width: 25%;
-    }
-
-    .column.middle {
-        width: 50%;
-    }
-
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    @media (max-width: 600px) {
-        .column.side, .column.middle {
-            width: 100%;
-        }
-    }             */
-    </style>
 
   </head>
 
 
   <body>
-<!--
-    <div class = "header">
-      <h1>Here is the title</h1>
-    </div>
 
-    <div class = "row">
-      <div class = "column side">
-        <h2>Intro</h2>
-        <p>details</p>
+    <header>
+      <ul>
+        <li><a href = "https://w112358.github.io">Home</a></li>
+        <li class = "dropdown">
+          <a>Projects</a>
+          <div class = "dropdown_content">
+            <a href = "https://w112358.github.io/class2_HW2">Project 2</a>
+            <a href = "https://w112358.github.io/class3_HW3">Project 3</a>
+            <a href = "https://w112358.github.io/class4_HWK">Project 4</a>
+        </li>
+        <li class = "nav_left"><a href = "https://bulbapedia.bulbagarden.net/wiki/Main_Page">More</a></li>
+      </ul>
+
+    <div id = "title_loc"></div>
+      <div id = "title">
+        <div class = "title_text">Poke & data</div>
       </div>
-      <div class = "column middle">
-        <h2>Main Boyd</h2>
-        <p>details</p>
-      </div>
-      <div class = "column side">
-        <h2>More</h2>
-        <p>details</p>
-      </div>
-    </div>
--->
+    </header>
+
+    <div id = "main">
     <svg id="mysvg"></svg>
+    </div>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
 
-    var margin1 = 200;
+    var margin1 = 100;
     var margin2 = 50
     d3.select("#mysvg")
       .attr("width", window.innerWidth - 2*margin1)
       .attr("height", window.innerHeight - 2*margin2)
       .style("background-color", "white")
-      .attr("opacity", "0.7")
+      .attr("opacity", "0.3")
       .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
 
 /*  d3.csv("Pokemon_less.csv", function(error, data){

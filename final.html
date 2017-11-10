@@ -3,6 +3,7 @@
 
   <head>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed" rel="stylesheet">
     <title>Poke</title>
     <style>
 
@@ -24,6 +25,7 @@
     </svg>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="d3-scale-radial.js"></script>
+
 
     <script>
 
@@ -65,13 +67,15 @@
                   .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
 
     var width_svg = + mysvg.attr("width"),
-        height_svg = + mysvg.attr("height"),
+        height_svg = + mysvg.attr("height");
         margin_svg = 50;
 
     var first = d3.select("#first")
-                .attr("width", width_svg - margin_svg*2)
-                .attr("height", height_svg - margin_svg*2)
-                .attr("transform", "translate("+ margin_svg +", "+ margin_svg +")");
+                  .attr("width", width_svg)
+                  .attr("height", height_svg)
+                  .attr("width", width_svg - margin_svg*2)
+                  .attr("height", height_svg - margin_svg*2)
+                  .attr("transform", "translate("+ margin_svg +", "+ margin_svg +")");
 
 
     var width = + first.attr("width"),
@@ -86,6 +90,7 @@
 
    d3.csv("poke_type.csv", function(error, data){
       if(error) throw error;
+
       var types = data;
       types.forEach(function(d){
         for(var j in d){
@@ -95,6 +100,7 @@
           }
         }
       });
+
       console.log(types)
 
       var o_band = d3.scaleBand()
@@ -110,12 +116,14 @@
                          return d.num;
                        })]);
 
-      var o_color = d3.scaleOrdinal()
-                      .range(["#98abc5", "#7b6888"])
-                      .domain(["num_pure", "num_npure"]);
+     var o_color = d3.scaleOrdinal()
+                     .range(["#98abc5", "#7b6888"])
+                     .domain(["num_pure", "num_npure"]);
 
       var stack = d3.stack()
                     .keys(["num_pure", "num_npure"]);
+
+
 
     /*  var pie = d3.pie()
                   .value(function(d){
@@ -153,8 +161,15 @@
                         })
                         .padAngle(0.01)
                         .padRadius(o_inner_radius)
-
-                 );
+                 )
+           .on("mouseover", function(d){
+             d3.select(this)
+               .attr("fill", "#95CACA")
+           })
+           .on("click", function(d){
+             d3.select(this)
+               .attr("fill", "#95CACA");
+           });
 
 
 
@@ -173,6 +188,7 @@
            .attr("transform", function(d) { return (o_band(d.type) + o_band.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI ? "rotate(90)translate(0,16)" : "rotate(-90)translate(0,-9)"; })
            .text(function(d) { return d.type; })
            .attr("fill", "#fff")
+           .attr("font-family", "Barlow Condensed")
            .attr("font-size", "20px");
 
       var y_axis = first.append("g")
@@ -191,6 +207,7 @@
 
       y_tick.append("text")
             .text(o_radial.tickFormat(10, "s"))
+            .attr("font-family", "Barlow Condensed")
             .attr("x", -6)
             .attr("y", function(d) { return -o_radial(d); })
             .attr("dy", "0.35em")
