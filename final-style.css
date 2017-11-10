@@ -2,18 +2,17 @@
 
 body{
   margin: 0;
-
-}
-
-header{
-  width: cover;
-  height: 1100px;
   background-color: black;
   background-image: url("img/background.jpg");
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
-  background-size: cover;
+  background-size:cover;
+}
+
+header{
+  width: cover;
+  height: 1300px;
 }
 
 #title_loc{
@@ -33,7 +32,7 @@ header{
 
 .title_text{
   font-size: 180px;
-  font-family: sans-serif;
+  font-family: 'Audiowide', cursive;
   color: black;
   text-align: center;
 }
