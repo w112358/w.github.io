@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="final-style.css">
     <script src="d3-scale-radial.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail|Barlow+Condensed" rel="stylesheet">
     <title>Poke</title>
 
   </head>
@@ -234,7 +234,7 @@
                       .innerRadius(radius * 0.5)
                       .outerRadius(radius * 0.9)
                       .padRadius(radius * 0.8)
-                      .padAngle(0.05);
+                      .padAngle(0.035);
 
           var color = d3.scaleOrdinal()
                         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
@@ -242,7 +242,7 @@
 
           var gene_shape = gene.append("g")
                                .attr("transform", "translate("+ width/2 +", "+ height/2 +")")
-                               .selectAll(".arc")
+                               .selectAll("arc")
                                .data(pie(poke_gene))
                                .enter().append("g")
                                .attr("class", "arc");
@@ -281,11 +281,12 @@
     var type_num = d3.select("#type")
                  .attr("width", width)
                  .attr("height", height)
-
                  .attr("transform", "translate("+ window.innerWidth*0.08 +", 0)");
 
-    var o_inner_radius = 220;
+    var o_inner_radius = Math.min(width/4, height/4);
     var o_outer_radius = Math.min(width/2, height/2);
+    var i_inner_radius = i_outer_radius * 0.5;
+    var i_outer_radius = o_inner_radius * 0.9;
 
     var type_num_shape = type_num.append("g")
                                  .attr("transform", "translate("+ width/2 +", "+ height/2*1.015 +")");
@@ -318,16 +319,12 @@
                          return d.num;
                        })]);
 
-     var o_color = d3.scaleOrdinal()
+      var o_color = d3.scaleOrdinal()
                      .range(["#98abc5", "#7b6888"])
                      .domain(["num_pure", "num_npure"]);
 
       var stack = d3.stack()
                     .keys(["num_pure", "num_npure"]);
-
-      console.log(stack(types));
-
-      console.log(types.columns.slice(1,-24));
 
       type_num_shape.append("g")
                     .selectAll("g")
@@ -354,7 +351,7 @@
                                  .endAngle(function(d){
                                    return o_band(d.data.type) + o_band.bandwidth();
                                  })
-                                 .padAngle(0.01)
+                                 .padAngle(0.035)
                                  .padRadius(o_inner_radius)
                           );
 

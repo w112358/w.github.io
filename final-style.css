@@ -95,7 +95,7 @@ header ul li a:hover{
 #main{
   margin: 0;
   width: cover;
-  height: 3800px;
+  height: 4000px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -276,14 +276,14 @@ input[type=submit]:hover {
 }
 
 .select_name{
-  font-family: sans-serif;
+  font-family: "Barlow Condensed";
   font-size: 20px;
   color:white;
 
 }
 
 .select_type{
-  font-family: sans-serif;
+  font-family: "Barlow Condensed";
   font-size: 20px;
   color:white;
 }

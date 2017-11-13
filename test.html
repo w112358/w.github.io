@@ -235,15 +235,15 @@
 
           var g = gene.append("g")
                       .attr("transform", "translate("+ width/2 +", "+ height/2 +")")
-                      .selectAll(".arc")
+                      .selectAll("arc")
                       .data(pie(poke_gene))
                       .enter().append("g")
-                      .attr("class", "arc");
+                      .attr("class", arc);
 
 
           g.append("path")
-           .transition()
-           .duration(3000)
+            .transition()
+            .duration(3000)
 
            .attr("d", arc)
            .style("fill", function(d){
