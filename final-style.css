@@ -26,7 +26,7 @@ header{
   opacity: 0.7;
   width: cover;
   height: 300px;
-  background-color: white;
+  background-color: black;
 
 
 }
@@ -34,7 +34,7 @@ header{
 .title_text{
   font-size: 180px;
   font-family: 'Audiowide', cursive;
-  color: black;
+  color: white;
   text-align: center;
 }
 
@@ -62,8 +62,8 @@ header ul li a{
   text-align: center;
   padding: 20px 50px;
   text-decoration: none;
-  font-size: 40px;
-  font-family: sans-serif;
+  font-size: 32px;
+  font-family: 'Audiowide', cursive;;
 
 }
 
@@ -95,12 +95,13 @@ header ul li a:hover{
 #main{
   margin: 0;
   width: cover;
-  height: 3500px;
+  height: 3800px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
 .main_content{
-  padding: 50px 180px;
+  padding: 50px 250px;
+
 }
 
 .main_part{
@@ -124,8 +125,8 @@ header ul li a:hover{
 
 .main_text{
   color: white;
-  font-size: 25px;
-  font-family: sans-serif;
+  font-size: 30px;
+  font-family: 'Aladin', cursive;;
   float:left;
 }
 
@@ -138,7 +139,7 @@ header ul li a:hover{
 }
 
 .column_middle {
-    width: 50%;
+    width: 75%;
 }
 
 .row:after {
@@ -147,11 +148,24 @@ header ul li a:hover{
     clear: both;
 }
 
+@media (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}
+
 .gene_body {
     list-style-type: none;
     margin: 0;
     padding: 50px 0px 50px 0px;
-    max-width: 340px;
+    max-width: 280px;
+}
+
+.type_body {
+    list-style-type: none;
+    margin: 0;
+    padding: 50px 0px 50px 0px;
+    max-width: 180px;
 }
 
 .gene_button{
@@ -195,22 +209,91 @@ header ul li a:hover{
 
 .footer_loc{
   width: cover;
-  height: 1500px;
+  height: 300px;
   opacity: 0;
 }
 
 
 footer{
   margin: 0px;
-  width: cover;
+  width: 100%;
   height: 300px;
   background-color: rgba(0, 0, 0, 0.7);
   text-align: center;
 }
 
-.foot_text{
+.footer_text{
   padding:50px;
   font-size: 55px;
   font-family: 'Audiowide', cursive;
   color: white;
+}
+
+.arc path{
+  stroke: none;
+}
+
+.arc text{
+  font-size: 20px;
+  font-family: 'Aladin', cursive;
+  text-anchor: middle;
+  color: white;
+}
+
+input[type = text],select{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.4);
+  color:white;
+}
+
+input[type = text]:focus{
+  border: 2px solid white;
+}
+
+select:focus{
+  border: 2px solid white;
+}
+
+input[type = submit]{
+  width: 100%;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input[type=submit]:hover {
+  border: 2px solid white;
+  font-weight: bold;
+}
+
+.select_name{
+  font-family: sans-serif;
+  font-size: 20px;
+  color:white;
+
+}
+
+.select_type{
+  font-family: sans-serif;
+  font-size: 20px;
+  color:white;
+}
+
+.submit{
+  font-size: 20px;
+}
+
+.select_space{
+  width: 100%;
+  height: 250px;
+  opacity: 0;
 }

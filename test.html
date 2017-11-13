@@ -1,33 +1,288 @@
 <!DocTYPE HTML>
+
 <html>
 
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="final-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail" rel="stylesheet">
     <title>Poke</title>
-    <style>
 
-/*    body{
-      margin: 0;
-      background-color: black;
-      background-image: url("img/b1.jpg");
-      background-attachment: fixed;
-    }
-*/
-
-    </style>
   </head>
+
 
   <body>
 
-    <svg id="mysvg">
-      <svg id="first"></svg>
-    </svg>
+    <header>
+      <ul>
+        <li><a href = "https://w112358.github.io">Home</a></li>
+        <li class = "dropdown">
+          <a>Projects</a>
+          <div class = "dropdown_content">
+            <a href = "https://w112358.github.io/class2_HW2">Project 2</a>
+            <a href = "https://w112358.github.io/class3_HW3">Project 3</a>
+            <a href = "https://w112358.github.io/class4_HWK">Project 4</a>
+        </li>
+        <li class = "nav_left"><a href = "https://bulbapedia.bulbagarden.net/wiki/Main_Page">More</a></li>
+      </ul>
+
+    <div class = "title_loc"></div>
+      <div class = "title">
+        <div class = "title_text">Poke & data</div>
+      </div>
+    </header>
+
+    <div id = "main" class = "main_content">
+      <div class = "main_part">
+        <div class = "main_title">Generations</div>
+
+        <div class = "main_text">
+          <p>
+            All of the licensed Pokémon properties overseen by The Pokémon Company International
+            are divided roughly by generation. These generations are roughly
+            chronological divisions by release; every several years, when an
+            official sequel in the main RPG series is released that features new Pokémon,
+            characters, and gameplay concepts, that sequel is considered the start of a new
+            generation of the franchise.
+          </p>
+        <div>
+
+        <div class = "row">
+          <div class = "column_side">
+            <ul class = "gene_body">
+              <li class = "gene_button" onclick = "g(1)"><span>G1 Red & Green</span></li>
+              <li class = "gene_button" onclick = "g(2)"><span>G2 Gold & Silver</span></li>
+              <li class = "gene_button" onclick = "g(3)"><span>G3 Ruby & Sapphire</span></li>
+              <li class = "gene_button" onclick = "g(4)"><span>G4 Diamond & Pearl</span></li>
+              <li class = "gene_button" onclick = "g(5)"><span>G5 Black & White</span></li>
+              <li class = "gene_button" onclick = "g(6)"><span>G6 X & Y</span></li>
+              <li class = "gene_button" onclick = "g(7)"><span>G7 Sun & Moon</span></li>
+            </ul>
+          </div>
+
+          <div class = "column_middle">
+              <svg id = "gene"></svg>
+
+          </div>
+        </div>
+      </div>
+
+      <div class = "main_space"></div>
+
+      <div class = "main_part">
+        <div class = "main_title">types</div>
+
+        <div class = "main_text">
+          <p>
+            Types are properties for Pokémon and their moves. As of Generation
+            VI, there are 18 types. Most of these were introduced during Generation I,
+            but the Dark and Steel types were introduced in Generation II and the
+            Fairy type was introduced in Generation VI.
+          </p>
+          <p>
+            A move has exactly one type. The type of a damaging move typically
+            defines which types of Pokémon it is super effective against, which
+            types of Pokémon it is not very effective against, and which types
+            of Pokémon it is completely ineffective against.
+          </p>
+        <div>
+
+        <div class = "row">
+          <div class = "column_side">
+            <ul class = "gene_body">
+              <li class = "gene_button"><span>G1 Red & Green</span></li>
+              <li class = "gene_button"><span>G2 Gold & Silver</span></li>
+              <li class = "gene_button"><span>G3 Ruby & Sapphire</span></li>
+
+            </ul>
+          </div>
+
+          <div class = "column_middle">
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class = "main_space"></div>
+
+      <div class = "main_part">
+        <div class = "main_title">Pokedex</div>
+
+        <div class = "main_text">
+          <p>
+            Every Pokémon creature has an array of stats.
+            HP (Hit Points) is a Pokémon's life force. The Speed stat decides which
+            Pokémon will make the first move in battle. Attack and Special Attack
+            measure the strength of moves used by your Pokémon; the higher this is,
+            the more damage you will do to opponents. Attack corresponds to moves in
+            the Physical category, while Special Attack corresponds to Special moves.
+            Similarly, Defense and Special Defense measure the ability to take attacks
+            from other Pokémon; the higher the stat is, the fewer Hit Points will be
+            lost when attacked. Defense correspnds to moves in the Physical category,
+            while Special Defense corresponds to Special moves.
+          </p>
+        <div>
+
+        <div class = "row">
+          <div class = "column_side">
+           <label for = "name" class = "poke_name">Name</label>
+           <input type = "text" id = "name" placeholder = "imput the name...">
+
+           <label for = "type" class = "poke_name">Type</label>
+           <select id = "type" >
+             <option value = "bug">bug</option>
+             <option value = "dark">dark</option>
+             <option value = "dragon">dragon</option>
+             <option value = "electric">electric</option>
+             <option value = "fairy">fairy</option>
+             <option value = "fighting">fighting</option>
+             <option value = "fire">fre</option>
+             <option value = "flying">flying</option>
+             <option value = "ghost">ghost</option>
+             <option value = "grass">grass</option>
+             <option value = "ground">ground</option>
+             <option value = "ice">ice</option>
+             <option value = "normal">normal</option>
+             <option value = "poison">poison</option>
+             <option value = "psychic">psychic</option>
+             <option value = "rock">bug</option>
+             <option value = "steel">steel</option>
+             <option value = "water">water</option>
+           </select>
+          </div>
+
+          <div class = "column_middle">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class = "footer_loc"></div>
+
+    <footer>
+      <div class= "footer_text">
+        <p>Pokemon & Data</p>
+      </div>
+    </footer>
+    <!--    <svg id="mysvg"></svg>   -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="d3-scale-radial.js"></script>
 
     <script>
 
-  /*  d3.queue()
+
+      var width = (window.innerWidth-900)*0.75;
+      var height = 620;
+      var gene = d3.select("#gene")
+                   .attr("width", width)
+                   .attr("height", height)
+                   .attr("transform", "translate("+ window.innerWidth*0.15 +", 0)");
+
+
+        var g = 7;
+
+
+
+
+        console.log(g);
+
+        d3.csv("poke_gene.csv", function(error, data){
+          if(error) throw error;
+
+          console.log(data);
+          poke_gene = data;
+          poke_gene.forEach(function(d){
+            for(var j in d){
+              var num = + d[j];
+              if(isNaN(num) == false){
+              d[j] = num;
+              }
+            }
+          });
+
+          console.log(poke_gene);
+
+          var radius = Math.min(width, height)/2;
+
+          var pie = d3.pie()
+                      .sort(null)
+                      .value(function(d, g){
+
+                        switch(g){
+                          case 1: return d.gene1; break;
+                          case 2: return d.gene2; break;
+                          case 3: return d.gene3; break;
+                          case 4: return d.gene4; break;
+                          case 5: return d.gene5; break;
+                          case 6: return d.gene6; break;
+                          case 7: return d.gene7; break;
+                        }
+
+                      });
+
+
+          var arc = d3.arc()
+                      .innerRadius(radius * 0.5)
+                      .outerRadius(radius * 0.9)
+                      .padRadius(radius * 0.8)
+                      .padAngle(0.05);
+
+          var color = d3.scaleOrdinal()
+                        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+                        .domain(["hp", "attack", "defense", "sp_attack", "sp_defense", "speed"]);
+
+          var g = gene.append("g")
+                      .attr("transform", "translate("+ width/2 +", "+ height/2 +")")
+                      .selectAll(".arc")
+                      .data(pie(poke_gene))
+                      .enter().append("g")
+                      .attr("class", "arc");
+
+
+          g.append("path")
+           .transition()
+           .duration(3000)
+
+           .attr("d", arc)
+           .style("fill", function(d){
+             return color(d.data.label);
+           });
+
+          g.append("text")
+           .attr("transform", function(d){
+             return "translate("+ arc.centroid(d) +")";
+           })
+           .attr("dy", ".35em")
+           .text(function(d){
+             return d.data.label;
+           });
+
+        });
+
+
+    </script>
+
+    <script>
+
+    var margin1 = 100;
+    var margin2 = 50
+    d3.select("#mysvg")
+      .attr("width", window.innerWidth - 2*margin1)
+      .attr("height", window.innerHeight - 2*margin2)
+      .style("background-color", "black")
+      .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
+
+/*  d3.csv("Pokemon_less.csv", function(error, data){
+      console.log(data);
+    });
+
+    d3.csv("poke_type.csv", function(error, data){
+      console.log(data);
+    })        */
+
+    d3.queue()
       .defer(d3.csv, "Pokemon_less.csv")
       .defer(d3.csv, "poke_type.csv")
       .awaitAll(function(error, data){
@@ -37,12 +292,14 @@
         var types = data[1];
 
         pokes.forEach(function(d){
+  //      d.index = parseFloat(i);
           for(var j in d){
             var num = + d[j];
             if(isNaN(num) == false){
               d[j] = num;
             }
           }
+  //        console.log(d);
         })
         types.forEach(function(d){
           for(var j in d){
@@ -51,165 +308,13 @@
               d[j] = num;
             }
           }
+  //        console.log(d);
         })
-        return pokes, types;
-      })
-      */
-    var margin1 = 200;
-    var margin2 = 50;
-    var mysvg = d3.select("#mysvg")
-                  .attr("width", window.innerWidth - 2*margin1)
-                  .attr("height", window.innerHeight- 2*margin2)
-                  .style("background-color", "black")
-                  .attr("opacity", "1")
-                  .attr("transform", "translate(" + margin1 + ", " + margin2 + ")");
 
-    var width_svg = + mysvg.attr("width"),
-        height_svg = + mysvg.attr("height"),
-        margin_svg = 50;
-
-    var first = d3.select("#first")
-                .attr("width", width_svg - margin_svg*2)
-                .attr("height", height_svg - margin_svg*2)
-                .attr("transform", "translate("+ margin_svg +", "+ margin_svg +")");
-
-
-    var width = + first.attr("width"),
-        height = + first.attr("height"),
-        o_inner_radius = 180,
-        o_outer_radius = Math.min(width/2, height/2);
-
-    var first = first.append("g")
-                     .attr("transform", "translate("+ width/2 +", "+ height/2 +")");
-
-
-
-   d3.csv("poke_type.csv", function(error, data){
-      if(error) throw error;
-      var types = data;
-      types.forEach(function(d){
-        for(var j in d){
-          var num = +d[j];
-          if(isNaN(num) == false){
-            d[j] = num;
-          }
-        }
-      });
-      console.log(types)
-
-      var o_band = d3.scaleBand()
-                      .range([0, 2*Math.PI])
-                      .domain(types.map(function(d){
-                        return d.type;
-                      }))
-                      .align(0);
-
-      var o_radial = d3.scaleRadial()
-                       .range([o_inner_radius, o_outer_radius])
-                       .domain([0, d3.max(types,function(d){
-                         return d.num;
-                       })]);
-
-      var o_color = d3.scaleOrdinal()
-                      .range(["#98abc5", "#7b6888"])
-                      .domain(["num_pure", "num_npure"]);
-
-      var stack = d3.stack()
-                    .keys(["num_pure", "num_npure"]);
-
-    /*  var pie = d3.pie()
-                  .value(function(d){
-                    return d.
-                  })   */
-
-      console.log(stack(types));
-
-      console.log(types.columns.slice(1,-24));
-
-      first.append("g")
-           .selectAll("g")
-           .data(stack(types))
-           .enter().append("g")
-           .attr("fill", function(d){
-             return o_color(d.key);
-           })
-           .selectAll("path")
-           .data(function(d){
-             return d;
-           })
-           .enter().append("path")
-           .attr("d", d3.arc()
-                        .innerRadius(function(d){
-                          return o_radial(d[0]);
-                        })
-                        .outerRadius(function(d){
-                          return o_radial(d[1]);
-                        })
-                        .startAngle(function(d){
-                          return o_band(d.data.type);
-                        })
-                        .endAngle(function(d){
-                          return o_band(d.data.type) + o_band.bandwidth();
-                        })
-                        .padAngle(0.01)
-                        .padRadius(o_inner_radius)
-
-                 );
-
-
-
-      var label = first.append("g")
-                     .selectAll("g")
-                     .data(types)
-                     .enter().append("g")
-                     .attr("text-anchor", "middle")
-                     .attr("transform", function(d) { return "rotate(" + ((o_band(d.type) + o_band.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + o_inner_radius + ", 0)"; });
-
-      label.append("line")
-           .attr("x2", -5)
-           .attr("stroke", "#fff");
-
-      label.append("text")
-           .attr("transform", function(d) { return (o_band(d.type) + o_band.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI ? "rotate(90)translate(0,16)" : "rotate(-90)translate(0,-9)"; })
-           .text(function(d) { return d.type; })
-           .attr("fill", "#fff")
-           .attr("font-size", "20px");
-
-      var y_axis = first.append("g")
-                      .attr("text-anchor", "end");
-
-      var y_tick = y_axis.selectAll("g")
-                         .data(o_radial.ticks(10).slice(1))
-                         .enter().append("g");
-
-      y_tick.append("circle")
-            .attr("fill", "none")
-            .attr("stroke", "#fff")
-            .attr("stroke-opacity", "0.8")
-            .attr("r", o_radial)
-            .attr("opacity", 0.5);
-
-      y_tick.append("text")
-            .text(o_radial.tickFormat(10, "s"))
-            .attr("x", -6)
-            .attr("y", function(d) { return -o_radial(d); })
-            .attr("dy", "0.35em")
-            .attr("fill", "none")
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 2)
-            .attr("opacity", 0.5);
-/*
-      first.selectAll("g")
-           .on("mouseover", function(d){
-              d3.select("path")
-                .attr("fill", "#6b486b");
-            })
-            .on("mouseout", function(d){
-              d3.select("path")
-                .attr("fill", "#7b6888");
-            })   */
-
+      return pokes, types;
     })
+
+
 
 
 
