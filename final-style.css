@@ -297,3 +297,19 @@ input[type=submit]:hover {
   height: 250px;
   opacity: 0;
 }
+
+
+.tshape:hover{
+  fill: #d0743c;
+}
+
+.tshape:active{
+  fill: #ff8c00;
+}
+
+.i_arc text{
+  fill: white;
+  font-family: "Barlow Condensed";
+  font-size:15px;
+  text-anchor: middle;
+}

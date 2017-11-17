@@ -5,7 +5,8 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="final-style.css">
-    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail" rel="stylesheet">
+    <script src="d3-scale-radial.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail|Barlow+Condensed" rel="stylesheet">
     <title>Poke</title>
 
   </head>
@@ -45,7 +46,7 @@
             characters, and gameplay concepts, that sequel is considered the start of a new
             generation of the franchise.
           </p>
-        <div>
+        </div>
 
         <div class = "row">
           <div class = "column_side">
@@ -85,23 +86,23 @@
             types of Pokémon it is not very effective against, and which types
             of Pokémon it is completely ineffective against.
           </p>
-        <div>
-
+        </div>
+<!--
         <div class = "row">
           <div class = "column_side">
-            <ul class = "gene_body">
-              <li class = "gene_button"><span>G1 Red & Green</span></li>
-              <li class = "gene_button"><span>G2 Gold & Silver</span></li>
-              <li class = "gene_button"><span>G3 Ruby & Sapphire</span></li>
-
+            <ul class = "type_body">
+              <li class = "gene_button" onclick = ""><span>Distribution</span></li>
+              <li class = "gene_button" onclick = ""><span>others</span></li>
             </ul>
           </div>
 
           <div class = "column_middle">
-
+            <svg id = "type"></svg>
 
           </div>
         </div>
+-->    <svg id = "type"></svg>
+
       </div>
 
       <div class = "main_space"></div>
@@ -122,40 +123,47 @@
             lost when attacked. Defense correspnds to moves in the Physical category,
             while Special Defense corresponds to Special moves.
           </p>
-        <div>
+        </div>
 
         <div class = "row">
           <div class = "column_side">
-           <label for = "name" class = "poke_name">Name</label>
-           <input type = "text" id = "name" placeholder = "imput the name...">
+            <div class = "select_space"></div>
+            <div class = "select_space"></div>
+            <form>
+              <label for = "name" class = "select_name">Name</label>
+              <input type = "text" id = "name" placeholder = "name...">
 
-           <label for = "type" class = "poke_name">Type</label>
-           <select id = "type" >
-             <option value = "bug">bug</option>
-             <option value = "dark">dark</option>
-             <option value = "dragon">dragon</option>
-             <option value = "electric">electric</option>
-             <option value = "fairy">fairy</option>
-             <option value = "fighting">fighting</option>
-             <option value = "fire">fre</option>
-             <option value = "flying">flying</option>
-             <option value = "ghost">ghost</option>
-             <option value = "grass">grass</option>
-             <option value = "ground">ground</option>
-             <option value = "ice">ice</option>
-             <option value = "normal">normal</option>
-             <option value = "poison">poison</option>
-             <option value = "psychic">psychic</option>
-             <option value = "rock">bug</option>
-             <option value = "steel">steel</option>
-             <option value = "water">water</option>
-           </select>
+              <label for = "type" class = "select_type">Type</label>
+              <select id = "type" name = "poke_type">
+                <option value = "bug">bug</option>
+                <option value = "dark">dark</option>
+                <option value = "dragon">dragon</option>
+                <option value = "electric">electric</option>
+                <option value = "fairy">fairy</option>
+                <option value = "fighting">fighting</option>
+                <option value = "fire">fre</option>
+                <option value = "flying">flying</option>
+                <option value = "ghost">ghost</option>
+                <option value = "grass">grass</option>
+                <option value = "ground">ground</option>
+                <option value = "ice">ice</option>
+                <option value = "normal">normal</option>
+                <option value = "poison">poison</option>
+                <option value = "psychic">psychic</option>
+                <option value = "rock">bug</option>
+                <option value = "steel">steel</option>
+                <option value = "water">water</option>
+              </select>
+
+              <input type = "submit" value = "submit" class = "submit">
+            </form>
           </div>
 
           <div class = "column_middle">
 
           </div>
         </div>
+
       </div>
 
     </div>
@@ -174,15 +182,17 @@
 
 
       var width = (window.innerWidth-1000)*0.75;
-      var height = 620;
+      var height = 650;
       var gene = d3.select("#gene")
                    .attr("width", width)
                    .attr("height", height)
-                   .attr("transform", "translate("+ window.innerWidth*0.15 +", 0)");
+                   .attr("transform", "translate("+ window.innerWidth * 0.15 +", "+ window.innerHeight * 0.05 +")")
+                   .append("g")
+                   .attr("transform", "translate("+ width/2 +", "+ height/2 +")");
 
 
 
-    function g(generation){
+      function g(generation){
 
         d3.csv("poke_gene.csv", function(error, data){
           if(error) throw error;
@@ -220,45 +230,284 @@
 
 
           var arc = d3.arc()
-                      .innerRadius(radius * 0.5)
-                      .outerRadius(radius * 0.9)
+                      .innerRadius(radius * 0.4)
+                      .outerRadius(radius * 0.7)
                       .padRadius(radius * 0.8)
-                      .padAngle(0.05);
+                      .padAngle(0.05)
+                      .cornerRadius(10);
 
           var color = d3.scaleOrdinal()
                         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
                         .domain(["hp", "attack", "defense", "sp_attack", "sp_defense", "speed"]);
 
-          var gene_shape = gene.append("g")
-                      .attr("transform", "translate("+ width/2 +", "+ height/2 +")")
-                      .selectAll("arc")
-                      .data(pie(poke_gene))
-                      .enter().append("g")
-                      .attr("class", "arc");
 
 
-          gene_shape.append("path")
+          var gene_shape = gene.selectAll(".arc")
+                               .data(pie(poke_gene));
+
+          var gene_enter = gene_shape.enter().append("g")
+                                     .attr("class", "arc");
+
+          gene_shape.exit().remove();
+
+          gene_enter.append("path");
+
+          gene_enter.append("text");
+
+          gene_shape = gene_shape.merge(gene_enter);
+
+          gene_shape.selectAll("path")
+                    .data(d => [d])
                     .transition()
-                    .duration(2000)
+                    .duration(1800)
 
-                   .attr("d", arc)
-                   .style("fill", function(d){
-                     return color(d.data.label);
-                   });
+                    .attr("d", arc)
+                    .style("fill", function(d){
+                      return color(d.data.label);
+                    });
 
-          gene_shape.append("text")
+          gene_shape.selectAll("text")
+                    .data(d => [d])
+                    .transition()
+                    .duration(3500)
+                    .ease(d3.easeElastic)
                     .attr("transform", function(d){
                       return "translate("+ arc.centroid(d) +")";
                     })
                     .attr("dy", ".35em")
                     .text(function(d){
-                      return d.data.label;
+                        var t;
+                        switch(generation){
+                          case 1: t = d.data.gene1; break;
+                          case 2: t = d.data.gene2; break;
+                          case 3: t = d.data.gene3; break;
+                          case 4: t = d.data.gene4; break;
+                          case 5: t = d.data.gene5; break;
+                          case 6: t = d.data.gene6; break;
+                          case 7: t = d.data.gene7; break;
+                        }
+
+                      return d.data.label + ":" + Math.round(t);
                     });
 
+
         });
-    };
+
+    }
 
     g(1);
+
+    </script>
+
+
+    <script>
+
+    var width = (window.innerWidth-500)*0.75;
+    var height = 850;
+    var tsvg = d3.select("#type")
+                 .attr("width", width)
+                 .attr("height", height)
+                 .attr("transform", "translate("+ window.innerWidth*0.08 +", 0)");
+
+    var o_inner_radius = Math.min(width/4, height/4);
+    var o_outer_radius = Math.min(width/2, height/2);
+    var i_outer_radius = o_inner_radius * 0.7;
+    var i_inner_radius = i_outer_radius * 0.5;
+
+
+    var tshape = tsvg.append("g")
+                         .attr("transform", "translate("+ width/2 +", "+ height/2*1.015 +")");
+
+    d3.csv("poke_type.csv", function(error, data){
+      if(error) throw error;
+
+      var types = data;
+      types.forEach(function(d){
+        for(var j in d){
+          var num = +d[j];
+          if(isNaN(num) == false){
+            d[j] = num;
+          }
+        }
+      });
+
+      function column_to_row(d){
+           return [{type: d.hp, label: "hp"},
+                   {type: d.attack, label: "attack"},
+                   {type: d.defense, label: "defense"},
+                   {type: d.sp_atk, label: "sp_atk"},
+                   {type: d.sp_def, label: "sp_def"},
+                   {type: d.speed, label: "speed"}
+                 ];
+      };
+
+      var test = 1;
+      console.log(types[test]);
+
+
+      var o_band = d3.scaleBand()
+                      .range([0, 2*Math.PI])
+                      .domain(types.map(function(d){
+                        return d.type;
+                      }))
+                      .align(0);
+
+      var o_radial = d3.scaleRadial()
+                       .range([o_inner_radius, o_outer_radius])
+                       .domain([0, d3.max(types,function(d){
+                         return d.num;
+                       })]);
+
+      var o_color = d3.scaleOrdinal()
+                     .range(["#98abc5", "#7b6888"])
+                     .domain(["num_pure", "num_npure"]);
+
+      var stack = d3.stack()
+                    .keys(["num_pure", "num_npure"]);
+
+      var i_pie = d3.pie()
+                    .sort(null)
+                    .value(function(d){
+                      return d.type;
+                    });
+
+
+      var i_arc = d3.arc()
+                    .innerRadius(i_inner_radius)
+                    .outerRadius(i_outer_radius)
+                    .padRadius(i_outer_radius * 0.8)
+                    .padAngle(0.05)
+                    .cornerRadius(0);
+
+      var i_color = d3.scaleOrdinal()
+                    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+                    .domain(["hp", "attack", "defense", "sp_atk", "sp_def", "speed"]);
+
+
+      tshape.append("g")
+                    .selectAll("g")
+                    .data(stack(types))
+                    .enter().append("g")
+                    .attr("fill", function(d){
+                      return o_color(d.key);
+                    })
+                    .selectAll("path")
+                    .data(function(d){
+                      return d;
+                    })
+                    .enter().append("path")
+
+                    .attr("d", d3.arc()
+                                 .innerRadius(function(d){
+                                   return o_radial(d[0]);
+                                 })
+                                 .outerRadius(function(d){
+                                   return o_radial(d[1]);
+                                 })
+                                 .startAngle(function(d){
+                                   return o_band(d.data.type);
+                                 })
+                                 .endAngle(function(d){
+                                   return o_band(d.data.type) + o_band.bandwidth();
+                                 })
+                                 .padAngle(0.035)
+                                 .padRadius(o_inner_radius)
+                          )
+                    .attr("class", "tshape")
+                    .each(function(d, i){
+                      d.order = i;
+                    })
+                    .on("click", function(d){
+
+                      console.log(d.data.type);
+                      console.log(d.order);
+                      draw_i_shape(d.order);
+                    });
+
+      var label = tshape.append("g")
+                        .selectAll("g")
+                        .data(types)
+                        .enter().append("g")
+                        .attr("text-anchor", "middle")
+                        .attr("transform", function(d) { return "rotate(" + ((o_band(d.type) + o_band.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + o_inner_radius + ", 0)"; });
+
+      label.append("line")
+           .attr("x2", -5)
+           .attr("stroke", "#fff");
+
+      label.append("text")
+           .attr("transform", function(d) { return (o_band(d.type) + o_band.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI ? "rotate(90)translate(0,16)" : "rotate(-90)translate(0,-9)"; })
+           .text(function(d) { return d.type; })
+           .attr("fill", "#fff")
+           .attr("font-family", "Barlow Condensed")
+           .attr("font-size", "20px");
+
+      var y_axis = tshape.append("g")
+                         .attr("text-anchor", "end");
+
+      var y_tick = y_axis.selectAll("g")
+                         .data(o_radial.ticks(6).slice(1))
+                         .enter().append("g");
+
+      y_tick.append("circle")
+            .attr("fill", "none")
+            .attr("stroke", "#fff")
+            .attr("stroke-opacity", "0.8")
+            .attr("r", o_radial)
+            .attr("opacity", 0.8);
+
+      y_tick.append("text")
+            .text(o_radial.tickFormat(10, "s"))
+            .attr("font-family", "Barlow Condensed")
+            .attr("x", 10)
+            .attr("y", function(d) { return -o_radial(d); })
+            .attr("dy", "0.25em")
+            .attr("fill", "none")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.8);
+
+
+     function draw_i_shape(key){
+          var i_shape =  tshape.selectAll(".i_arc")
+                               .data(i_pie(column_to_row(types[key])));
+
+          var i_shape_enter = i_shape.enter().append("g")
+                                     .attr("class", "i_arc");
+
+          i_shape.exit().remove();
+
+          i_shape_enter.append("path");
+
+          i_shape_enter.append("text");
+
+          i_shape = i_shape.merge(i_shape_enter);
+
+          i_shape.selectAll("path")
+                 .data(d => [d])
+                 .transition()
+                 .duration(2000)
+                 .attr("d", i_arc)
+                 .style("fill", function(d){
+                   return i_color(d.data.label);
+                 });
+
+          i_shape.selectAll("text")
+                 .data(d => [d])
+                 .transition()
+                 .duration(2000)
+                 .attr("transform", function(d){
+                   return "translate("+ i_arc.centroid(d) +")"
+                 })
+                 .attr("dy", ".35em")
+                 .text(function(d){
+                   return d.data.label + ":" + Math.round(d.data.type);
+                 });
+       };
+
+    });
+
+
 
     </script>
 
@@ -311,10 +560,6 @@
 
       return pokes, types;
     })
-
-
-
-
 
     </script>
 

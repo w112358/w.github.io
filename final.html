@@ -61,7 +61,7 @@
 
       var width = (window.innerWidth-500)*0.75;
       var height = 850;
-      var type_num = d3.select("#type")
+      var tsvg = d3.select("#type")
                    .attr("width", width)
                    .attr("height", height)
                    .attr("transform", "translate("+ window.innerWidth*0.08 +", 0)");
@@ -72,8 +72,8 @@
       var i_inner_radius = i_outer_radius * 0.5;
 
 
-      var type_num_shape = type_num.append("g")
-                                   .attr("transform", "translate("+ width/2 +", "+ height/2*1.015 +")");
+      var tshape = tsvg.append("g")
+                           .attr("transform", "translate("+ width/2 +", "+ height/2*1.015 +")");
 
      d3.csv("poke_type.csv", function(error, data){
         if(error) throw error;
@@ -88,7 +88,7 @@
           }
         });
 
-        console.log(types)
+
 
 /*        function row_to_column(d) {
           return [
@@ -98,7 +98,7 @@
         }
 */
 
-        function extract(d, value_to_find){
+  /*      function extract(d, value_to_find){
 
              var poke_v = [];
 
@@ -108,13 +108,28 @@
                  poke_v.push(d[j]);
                };
              };
-             return poke_v;
-
-           });
-             return [{v: poke_v[5], poke_v[6], poke_v[7], poke_v[8], poke_v[9], poke_v[10]}];
+                 console.log(poke_v);
+             return [{poke_v[1]: poke_v[5], "label": "hp"},
+                     {poke_v[1]: poke_v[6], "label": "attack"},
+                     {poke_v[1]: poke_v[7], "label": "defense"},
+                     {poke_v[1]: poke_v[8], "label": "sp_attack"},
+                     {poke_v[1]: poke_v[9], "label": "sp_defense"},
+                     {poke_v[1]: poke_v[10], "label": "speed"}
+                   ];
+            });
+        };         */
+        function column_to_row(d){
+             return [{type: d.hp, label: "hp"},
+                     {type: d.attack, label: "attack"},
+                     {type: d.defense, label: "defense"},
+                     {type: d.sp_atk, label: "sp_atk"},
+                     {type: d.sp_def, label: "sp_def"},
+                     {type: d.speed, label: "speed"}
+                   ];
         };
 
-        console.log(extract(types, "bug"));
+        var test = 1;
+        console.log(types[test]);
 
 
         var o_band = d3.scaleBand()
@@ -140,23 +155,23 @@
         var i_pie = d3.pie()
                       .sort(null)
                       .value(function(d){
-                        return d;
+                        return d.type;
                       });
 
-            console.log(i_pie(extract(types, "bug")))
 
         var i_arc = d3.arc()
                       .innerRadius(i_inner_radius)
                       .outerRadius(i_outer_radius)
                       .padRadius(i_outer_radius * 0.8)
-                      .padAngle(0.035);
+                      .padAngle(0.05)
+                      .cornerRadius(0);
 
         var i_color = d3.scaleOrdinal()
                       .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
-                      .domain(["hp", "attack", "defense", "sp_attack", "sp_defense", "speed"]);
+                      .domain(["hp", "attack", "defense", "sp_atk", "sp_def", "speed"]);
 
 
-        type_num_shape.append("g")
+        tshape.append("g")
                       .selectAll("g")
                       .data(stack(types))
                       .enter().append("g")
@@ -168,6 +183,7 @@
                         return d;
                       })
                       .enter().append("path")
+
                       .attr("d", d3.arc()
                                    .innerRadius(function(d){
                                      return o_radial(d[0]);
@@ -183,27 +199,24 @@
                                    })
                                    .padAngle(0.035)
                                    .padRadius(o_inner_radius)
-                            );
+                            )
+                      .attr("class", "tshape")
+                      .each(function(d, i){
+                        d.order = i;
+                      })
+                      .on("click", function(d){
 
-        var i_shape =  type_num_shape.append("g")
-                    .selectAll("arc")
-                    .data(i_pie(types))
-                    .enter().append("g")
-                    .attr("class", "arc");
+                        console.log(d.data.type);
+                        console.log(d.order);
+                        draw_i_shape(d.order);
+                      });
 
-
-
-       i_shape.append("path")
-              .attr("d", i_arc)
-              .style("fill", "white");
-
-
-        var label = type_num_shape.append("g")
-                                  .selectAll("g")
-                                  .data(types)
-                                  .enter().append("g")
-                                  .attr("text-anchor", "middle")
-                                  .attr("transform", function(d) { return "rotate(" + ((o_band(d.type) + o_band.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + o_inner_radius + ", 0)"; });
+        var label = tshape.append("g")
+                          .selectAll("g")
+                          .data(types)
+                          .enter().append("g")
+                          .attr("text-anchor", "middle")
+                          .attr("transform", function(d) { return "rotate(" + ((o_band(d.type) + o_band.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + o_inner_radius + ", 0)"; });
 
         label.append("line")
              .attr("x2", -5)
@@ -216,8 +229,8 @@
              .attr("font-family", "Barlow Condensed")
              .attr("font-size", "20px");
 
-        var y_axis = type_num_shape.append("g")
-                        .attr("text-anchor", "end");
+        var y_axis = tshape.append("g")
+                           .attr("text-anchor", "end");
 
         var y_tick = y_axis.selectAll("g")
                            .data(o_radial.ticks(6).slice(1))
@@ -241,9 +254,45 @@
               .attr("stroke-width", 1.5)
               .attr("opacity", 0.8);
 
+
+       function draw_i_shape(key){
+            var i_shape =  tshape.selectAll(".i_arc")
+                                 .data(i_pie(column_to_row(types[key])));
+
+            var i_shape_enter = i_shape.enter().append("g")
+                                       .attr("class", "i_arc");
+
+            i_shape.exit().remove();
+
+            i_shape_enter.append("path");
+
+            i_shape_enter.append("text");
+
+            i_shape = i_shape.merge(i_shape_enter);
+
+            i_shape.selectAll("path")
+                   .data(d => [d])
+                   .transition()
+                   .duration(2000)
+                   .attr("d", i_arc)
+                   .style("fill", function(d){
+                     return i_color(d.data.label);
+                   });
+
+            i_shape.selectAll("text")
+                   .data(d => [d])
+                   .transition()
+                   .duration(2000)
+                   .attr("transform", function(d){
+                     return "translate("+ i_arc.centroid(d) +")"
+                   })
+                   .attr("dy", ".35em")
+                   .text(function(d){
+                     return d.data.label + ":" + Math.round(d.data.type);
+                   });
+         };
+
       })
-
-
 
 
     </script>
