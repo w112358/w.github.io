@@ -29,6 +29,7 @@ header{
   background-color: black;
 
 
+
 }
 
 .title_text{
@@ -95,7 +96,7 @@ header ul li a:hover{
 #main{
   margin: 0;
   width: cover;
-  height: 4000px;
+  height: 4400px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -113,6 +114,7 @@ header ul li a:hover{
   width: cover;
   height: 200px;
   opacity: 0;
+  display: inline-block;
 }
 
 .main_title{
@@ -128,6 +130,7 @@ header ul li a:hover{
   font-size: 30px;
   font-family: 'Aladin', cursive;;
   float:left;
+  display: block;
 }
 
 .column {
@@ -135,11 +138,13 @@ header ul li a:hover{
 }
 
 .column_side {
-    width: 25%;
+    width: 23%;
+    display: inline-block;
 }
 
 .column_middle {
-    width: 75%;
+    width: 70%;
+    display: inline-block;
 }
 
 .row:after {
@@ -237,7 +242,7 @@ footer{
   font-size: 20px;
   font-family: 'Aladin', cursive;
   text-anchor: middle;
-  color: white;
+  fill: white;
 }
 
 input[type = text],select{
@@ -260,6 +265,39 @@ select:focus{
   border: 2px solid white;
 }
 
+.select_label{
+  font-family: "Barlow Condensed";
+  font-size: 20px;
+  color:white;
+
+}
+
+
+
+#requirement_valuetext{
+  text-align: left;
+  color: white;
+  font-size: 20px;
+  font-family: "Barlow Condensed";
+}
+
+#requirement_value{
+  width: 90%;
+  height: 50px;
+  color: white;
+}
+
+.submit{
+  font-size: 20px;
+}
+
+.select_space{
+  width: 100%;
+  height: 100px;
+  opacity: 0;
+  display: inline-block;
+}
+
 input[type = submit]{
   width: 100%;
   color: white;
@@ -275,30 +313,6 @@ input[type=submit]:hover {
   font-weight: bold;
 }
 
-.select_name{
-  font-family: "Barlow Condensed";
-  font-size: 20px;
-  color:white;
-
-}
-
-.select_type{
-  font-family: "Barlow Condensed";
-  font-size: 20px;
-  color:white;
-}
-
-.submit{
-  font-size: 20px;
-}
-
-.select_space{
-  width: 100%;
-  height: 250px;
-  opacity: 0;
-}
-
-
 .tshape:hover{
   fill: #d0743c;
 }
@@ -313,3 +327,49 @@ input[type=submit]:hover {
   font-size:15px;
   text-anchor: middle;
 }
+
+.axis .domain{
+  display: none;
+}
+
+.axis text{
+  fill:white;
+  font-weight: bold;
+  text-anchor: start;
+}
+
+.legend{
+  fill:white;
+  font-family: "Barlow Condensed";
+  font-size: 13px;
+  text-anchor: end;
+}
+
+.d3-tip{
+  line-height: 1;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #6b486b;
+  font-size:20px;
+  font-family: "Barlow Condensed";
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.d3-tip:after {
+     box-sizing: border-box;
+     display: inline;
+     font-size: 14px;
+     width: 100%;
+     line-height: 1;
+     color: rgba(255, 255, 255, 0.8);
+     content: "\25BC";
+     position: absolute;
+     text-align: center;
+   }
+
+.d3-tip.n:after {
+    margin: -2px 0 0 0;
+    top: 100%;
+    left: 0;
+  }

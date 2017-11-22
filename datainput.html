@@ -129,12 +129,13 @@
           <div class = "column_side">
             <div class = "select_space"></div>
             <div class = "select_space"></div>
-            <form>
-              <label for = "name" class = "select_name">Name</label>
-              <input type = "text" id = "name" placeholder = "name...">
+            <form name = "select_form" onSubmit = "return submit_click()">
+              <label for = "select_name" class = "select_label">Name</label>
+              <input type = "text" id = "select_name" placeholder = "name...">
 
-              <label for = "type" class = "select_type">Type</label>
-              <select id = "type" name = "poke_type">
+              <label for = "select_type" class = "select_label">Type</label>
+              <select id = "select_type" name = "poke_type">
+                <option value = "none">none</option>
                 <option value = "bug">bug</option>
                 <option value = "dark">dark</option>
                 <option value = "dragon">dragon</option>
@@ -155,12 +156,27 @@
                 <option value = "water">water</option>
               </select>
 
+              <label for = "requirement_detail" class = "select_label">Requirement</label>
+                <select id = "requirement_detail" >
+                  <option value = "none">none</option>
+                  <option value = "1">hp</option>
+                  <option value = "2">attack</option>
+                  <option value = "3">defense</option>
+                  <option value = "4">sp_atk</option>
+                  <option value = "5">sp_def</option>
+                  <option value = "6">speed</option>
+                </select>
+
+              <label for = "reuirement_value" class = "select_label">Value : <span id = "requirement_valuetext">…</span>
+              </label>
+              <input type = "range" min = "0", max = "255" id = "requirement_value">
+
               <input type = "submit" value = "submit" class = "submit">
             </form>
           </div>
 
           <div class = "column_middle">
-
+            <svg id = "selector"></svg>
           </div>
         </div>
 
@@ -179,8 +195,6 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
     <script>
-
-
       var width = (window.innerWidth-1000)*0.75;
       var height = 650;
       var gene = d3.select("#gene")
@@ -316,7 +330,7 @@
 
 
     var tshape = tsvg.append("g")
-                         .attr("transform", "translate("+ width/2 +", "+ height/2*1.015 +")");
+                    .attr("transform", "translate("+ width/2 +", "+ height/2*1.015 +")");
 
     d3.csv("poke_type.csv", function(error, data){
       if(error) throw error;
@@ -415,6 +429,7 @@
                           )
                     .attr("class", "tshape")
                     .each(function(d, i){
+                      console.log(d);
                       d.order = i;
                     })
                     .on("click", function(d){
@@ -510,6 +525,210 @@
 
 
     </script>
+
+    <script>
+
+    var width = (window.innerWidth - 500) * 0.75;
+    var height = 500;
+    var rect_width = width - 60;
+    var rect_height = height - 50;
+    var selector = d3.select("#selector")
+                     .attr("width", width)
+                     .attr("height", height)
+              //       .style("background-color", "black")
+                     .attr("transform", "translate(0, 0)");
+
+    var rect_selector = selector.append("g")
+                                .attr("transform", "translate(40,20)");
+
+  /*
+    d3.select("#submit")
+      .on("click", function(d){
+        console.log("hehe");
+      });
+  */
+
+    d3.select("#requirement_value")
+      .on("input", function(){
+        requirement_value_update(this.value);
+      });
+    requirement_value_update(0);
+    function requirement_value_update(requirement_v){
+      d3.select("#requirement_valuetext").text(requirement_v);
+      d3.select("#requirement_value").property("value", requirement_v);
+    };
+
+    function submit_click(){
+      var t1 = d3.select("#select_name").node().value;
+      t1 = t1.toLowerCase();
+      var t2 = d3.select("#select_type").node().value;
+      var t3 = d3.select("#requirement_detail").node().value;
+      var t4 = d3.select("#requirement_value").node().value;
+
+
+      t = 5 < 4;
+      x = 5 > 4;
+
+      console.log(t);
+      console.log(x);
+      console.log(t4);
+
+      select_draw(t1, t2, t3, t4);
+
+      return false;
+    };
+
+
+
+    function select_draw(input_name, input_type, input_requirement, input_requirement_value){
+
+    d3.csv("poke_select.csv", function(error, d){
+      if(error) throw error;
+
+      var poke_select = d;
+      poke_select.forEach(function(d){
+        var num;
+        for(var j in d){
+          num = + d[j];
+          if(isNaN(num) == false){
+            d[j] = num;
+          }
+        }
+      });
+
+      var keys = poke_select.columns.slice(4);
+
+      var s = poke_select.filter(function(d){
+                if(d.name.toLowerCase() == input_name){
+                  return d;
+                }
+                else if(input_type != "none" && input_requirement != "none"){
+                  var t_or_f;
+                  var distance = 5;
+                  switch(input_requirement, distance){
+                    case 1: t_or_f = Math.abs(d.hp - input_requirement_value) < distance; break;
+                    case 2: t_or_f = Math.abs(d.attack - input_requirement_value) < distance; break;
+                    case 3: t_or_f = Math.abs(d.defense - input_requirement_value) < distance; break;
+                    case 4: t_or_f = Math.abs(d.sp_attack - input_requirement_value) < distance; break;
+                    case 5: t_or_f = Math.abs(d.sp_defense - input_requirement_value) < distance; break;
+                    case 6: t_or_f = Math.abs(d.speed - input_requirement_value) < distance; break;
+                  };
+
+                  console.log(d.name);
+                  console.log(input_requirement);
+                  console.log(Math.abs(d.attack - input_requirement_value));
+                  console.log(t_or_f);
+                  console.log(Math.abs(d.attack - input_requirement_value) < distance);
+                  console.log((d.type1 == input_type || d.type2 == input_type));
+                  console.log((d.type1 == input_type || d.type2 == input_type)&& t_or_f);
+
+                  if((d.type1 == input_type || d.type2 == input_type) && t_or_f){
+                    return d;
+                  };
+                };
+              });
+      console.log(s);
+
+      var x_axis0 = d3.scaleBand()
+                      .rangeRound([0, rect_width])
+                      .domain(s.map(function(d){
+                        return d.name;
+                      }))
+                      .paddingInner(0.1);
+
+      var x_axis1 = d3.scaleBand()
+                      .rangeRound([20, x_axis0.bandwidth()])
+                      .domain(keys)
+                      .padding(0.05);
+
+      var y_axis = d3.scaleLinear()
+                     .rangeRound([rect_height, 0])
+                     .domain([0, d3.max(s, function(d){
+                       return d3.max(keys, function(j){return d[j];})
+                     })])
+                     .nice();
+
+      var rect_color = d3.scaleOrdinal()
+                         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+                         .domain(keys);
+
+      var rect_shape = rect_selector.append("g")
+                         .selectAll("g")
+                         .data(s)
+                         .enter().append("g")
+                         .attr("transform", function(d){
+                           return "translate("+ x_axis0(d.name) +", 0)";
+                         })
+                         .selectAll("rect")
+                         .data(function(d){
+                           return keys.map(function(j){
+                             console.log({key:j, value:d[j]});
+                             return {key:j, value:d[j]};
+                           });
+                         })
+                        .enter().append("rect")
+                   //     .enter().append("rect")
+              //          .each(function(d){
+              //            console.log(d);
+              //          })
+                        .attr("x", function(d){
+              //            console.log(x_axis1(d.key));
+                          return x_axis1(d.key);
+                        })
+                        .attr("y", function(d){
+             //             console.log(y_axis(d.value));
+                          return y_axis(d.value);
+                        })
+                        .attr("width", x_axis1.bandwidth())
+                        .attr("height", function(d){
+                //          console.log(height - y_axis(d.value));
+                          return rect_height - y_axis(d.value);
+                        })
+                        .attr("fill", function(d){
+
+                          return rect_color(d.key);
+                        });
+
+      rect_selector.append("g")
+                   .attr("class", "axis")
+                   .attr("transform", "translate(0, "+ rect_height +")")
+                   .call(d3.axisBottom(x_axis0));
+
+      rect_selector.append("g")
+                   .attr("class", "axis")
+                   .call(d3.axisLeft(y_axis).ticks(null, "s"))
+                   .append("text")
+                   .attr("x", 2)
+                   .attr("y", y_axis(y_axis.ticks().pop()) + 0.5)
+                   .attr("dy", "0.32em")
+                   .text("value");
+
+      var legend = rect_selector.append("g")
+                                .attr("class", "legend")
+                                .selectAll("g")
+                                .data(keys.slice().reverse())
+                                .enter().append("g")
+                                .attr("transform", function(d, i) { return "translate(0," + i * 17 + ")"; });
+
+      legend.append("rect")
+            .attr("x", width - 100)
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", rect_color);
+
+      legend.append("text")
+            .attr("x", width - 115)
+            .attr("y", 9.5)
+            .attr("dy", "0.32em")
+            .text(function(d) { return d; });
+
+    });
+
+  };
+
+
+    </script>
+
 
     <script>
 
