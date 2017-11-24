@@ -96,7 +96,7 @@ header ul li a:hover{
 #main{
   margin: 0;
   width: cover;
-  height: 4400px;
+  height: 4100px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -333,6 +333,26 @@ input[type=submit]:hover {
 }
 
 .axis text{
+  fill:white;
+  font-weight: bold;
+  text-anchor: start;
+}
+
+.axis_bottom .domain{
+  display: none;
+}
+
+.axis_bottom text{
+  fill:white;
+  font-weight: bold;
+  text-anchor: start;
+}
+
+.axis_left .domain{
+  display: none;
+}
+
+.axis_left text{
   fill:white;
   font-weight: bold;
   text-anchor: start;

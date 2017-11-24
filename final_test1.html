@@ -201,7 +201,7 @@
 
 
       var width = (window.innerWidth-500)*0.70;
-      var height = 700;
+      var height = 800;
       var gene = d3.select("#gene")
                    .attr("width", width)
                    .attr("height", height)
@@ -600,11 +600,25 @@
       var t4 = d3.select("#requirement_value").node().value;
 
       select_draw(t1, t2, t3, t4);
-
       return false;
     };
 
+    var x_axis0 = d3.scaleBand()
+                    .rangeRound([0, rect_width])
+                    .domain([]);
 
+    rect_selector.append("g")
+                 .attr("class", "axis_bottom")
+                 .attr("transform", "translate(0, "+ rect_height +")")
+                 .call(d3.axisBottom(x_axis0));
+
+    var y_axis = d3.scaleLinear()
+                   .rangeRound([rect_height, 0])
+                   .domain([]);
+
+    rect_selector.append("g")
+                 .attr("class", "axis_left")
+                 .call(d3.axisLeft(y_axis).ticks(null, "s"));
 
     function select_draw(input_name, input_type, input_requirement, input_requirement_value){
 
@@ -658,9 +672,8 @@
               });
       console.log(s);
 
-      var x_axis0 = d3.scaleBand()
-                      .rangeRound([0, rect_width])
-                      .domain(s.map(function(d){
+
+            x_axis0.domain(s.map(function(d){
                         return d.name;
                       }))
                       .paddingInner(0.1);
@@ -670,9 +683,8 @@
                       .domain(keys)
                       .padding(0.05);
 
-      var y_axis = d3.scaleLinear()
-                     .rangeRound([rect_height, 0])
-                     .domain([0, d3.max(s, function(d){
+
+            y_axis.domain([0, d3.max(s, function(d){
                        return d3.max(keys, function(j){return d[j];})
                      })])
                      .nice();
@@ -680,18 +692,24 @@
       var rect_color = d3.scaleOrdinal()
                          .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
                          .domain(keys);
+/*
+      var tip = d3.tip()
+                  .attr('class', 'd3-tip')
+                  .html(function(d) {
+                    return d.key + ": <span style = 'color:darkred'>" + d.value + "</span>";
+                  });
+*/
 
       var rect_groups = rect_selector.selectAll("g.bar")
                                      .data(s);
-
-
 
        var rect_groups_enter = rect_groups.enter().append("g")
                                           .attr("class", "bar");
 
       rect_groups.exit().remove();
 
-      rect_groups = rect_groups.merge(rect_groups_enter)
+
+      rect_groups = rect_groups.merge(rect_groups_enter);
 
       rect_groups.transition()
                  .duration(1000)
@@ -712,73 +730,61 @@
 
       rect_shapes = rect_shapes.merge(rect_enters);
 
+  //    rect_shapes.call(tip);
+
       rect_shapes.transition()
                  .duration(1000)
                  .attr("x", function(d){
                   return x_axis1(d.key);
-                })
-                .attr("y", function(d){
-                  return y_axis(d.value);
-                })
-                .attr("width", x_axis1.bandwidth())
-                .attr("height", function(d){
-                  return rect_height - y_axis(d.value);
-                })
-                .attr("fill", function(d){
-
-                  return rect_color(d.key);
-                });
+                 })
+                 .attr("y", function(d){
+                   return y_axis(d.value);
+                 })
+                 .attr("width", x_axis1.bandwidth())
+                 .attr("height", function(d){
+                   return rect_height - y_axis(d.value);
+                 })
+                 .attr("fill", function(d){
+                   return rect_color(d.key);
+                 });
+        //         .on("mouseover", tip.show)
+        //         .on("mouseout", tip.hide);
 
       rect_shapes.exit().remove();
 
 
-      var rect_axis = rect_selector.selectAll("g.axis")
-                                   .data(function(d){return d;})
-                                   .each(function(d){console.log(d);});
-
-      var rect_axis_enter = rect_axis.enter().append("g")
-                                             .attr("class", "axis");
-
-      rect_axis.exit().remove();
-
-      rect_axis_enter.append("g");
-
-      rect_axis_enter.append("text");
-
-      rect_axis = rect_axis.merge(rect_axis_enter);
-
-      rect_axis.selectAll("g")
-                   .data(d => [d])
-                   .attr("class", "axis")
-                   .attr("transform", "translate(0, "+ rect_height +")")
+      rect_selector.selectAll("g.axis_bottom")
+                   .transition()
+                   .duration(1500)
                    .call(d3.axisBottom(x_axis0));
 
-      rect_axis.selectAll("text")
-                   .data(d => [d])
-                   .attr("class", "axis")
-                   .call(d3.axisLeft(y_axis).ticks(null, "s"))
+     rect_selector.selectAll("g.axis_left")
+                   .transition()
+                   .duration(1500)
+                   .call(d3.axisLeft(y_axis).ticks(null, "s"));
+
+      rect_selector.selectAll("g.axis_left")
                    .append("text")
-                   .attr("x", 2)
+                   .attr("x", 20)
                    .attr("y", y_axis(y_axis.ticks().pop()) + 0.5)
                    .attr("dy", "0.32em")
                    .text("value");
 
-
-      var legend = rect_selector.append("g")
+      var legend = selector.append("g")
                                 .attr("class", "legend")
                                 .selectAll("g")
                                 .data(keys.slice().reverse())
                                 .enter().append("g")
-                                .attr("transform", function(d, i) { return "translate(0," + i * 17 + ")"; });
+                                .attr("transform", function(d, i) { return "translate(0," + (50 + i * 17) + ")"; });
 
       legend.append("rect")
-            .attr("x", width - 100)
+            .attr("x", width-10)
             .attr("width", 15)
             .attr("height", 15)
             .attr("fill", rect_color);
 
       legend.append("text")
-            .attr("x", width - 115)
+            .attr("x", width - 15)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
             .text(function(d) { return d; });

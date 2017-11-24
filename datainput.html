@@ -355,9 +355,6 @@
                  ];
       };
 
-      var test = 1;
-      console.log(types[test]);
-
 
       var o_band = d3.scaleBand()
                       .range([0, 2*Math.PI])
@@ -433,9 +430,6 @@
                       d.order = i;
                     })
                     .on("click", function(d){
-
-                      console.log(d.data.type);
-                      console.log(d.order);
                       draw_i_shape(d.order);
                     });
 
