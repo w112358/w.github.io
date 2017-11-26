@@ -29,18 +29,7 @@
 
     <script>
 
-    var width = (window.innerWidth - 100) * 0.75;
-    var height = 700;
-    var selector = d3.select("#selector")
-                     .attr("width", width)
-                     .attr("height", height)
-                     .style("background-color", "black");
-
-    var rect_selector = selector.append("g")
-                                .attr("transform", "translate(20,30)");
-
-
-    d3.csv("poke_select.csv", function(error, d){
+    d3.csv("testdata.csv", function(error, d){
       if(error) throw error;
 
       var poke_select = d;
@@ -54,116 +43,33 @@
         }
       });
 
+      var s = poke_select.filter(function(d){
 
-      console.log(poke_select.columns.slice(4));
+                  var t_or_f;
+                  var input_type = "bug";
+                  var input_requirement_value = 70;
+                  var distance = 5;
+                  var input_requirement = 1;
+                  console.log(input_type);
+                  console.log(input_requirement);
+                  console.log(input_requirement_value);
+                  console.log(5);
+                  switch(input_requirement){
+                    case 1: t_or_f = Math.abs(d.hp - input_requirement_value) < distance; break;
+                    case 2: t_or_f = Math.abs(d.attack - input_requirement_value) < distance; break;
+                    case 3: t_or_f = Math.abs(d.defense - input_requirement_value) < distance; break;
+                    case 4: t_or_f = Math.abs(d.sp_attack - input_requirement_value) < distance; break;
+                    case 5: t_or_f = Math.abs(d.sp_defense - input_requirement_value) < distance; break;
+                    case 6: t_or_f = Math.abs(d.speed - input_requirement_value) < distance; break;
+                  };
+ console.log(t_or_f);
+                  if(t_or_f && (d.type1 == input_type || d.type2 == input_type)){
+                    return d;}
 
-      var keys = poke_select.columns.slice(4);
+              });
 
-var s =[];
-s.push(poke_select[1]);
-s.push(poke_select[2]);
-console.log(s);
-      var x_axis0 = d3.scaleBand()
-                      .rangeRound([0, width])
-                      .domain(s.map(function(d){
-                        return d.name;
-                      }))
-                      .paddingInner(0.1);
-
-console.log(s.map(function(d){
-  return d.name;
-}));
-
-      var x_axis1 = d3.scaleBand()
-                      .rangeRound([0, x_axis0.bandwidth()])
-                      .domain(keys)
-                      .padding(0.05);
-
-      var y_axis = d3.scaleLinear()
-                     .rangeRound([height, 0])
-                     .domain([0, d3.max(s, function(d){
-                       return d3.max(keys, function(j){return d[j];})
-                     })])
-                     .nice();
-console.log(d3.max(s, function(d){
-  return d3.max(keys, function(j){return d[j];})
-}));
-
-
-      var rect_color = d3.scaleOrdinal()
-                         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
-                         .domain(keys);
-
-      rect_selector.append("g")
-                         .selectAll("g")
-                         .data(s)
-                         .enter().append("g")
-                         .attr("transform", function(d){
-                           return "translate("+ x_axis0(d.name) +", 0)";
-                         })
-                        .selectAll("rect")
-                        .data(function(d){
-                          return keys.map(function(j){
-                //            console.log({key:j, value:d[j]});
-                            return {key:j, value:d[j]};
-                          });
-                        })
-                        .enter().append("rect")
-              //          .each(function(d){
-              //            console.log(d);
-              //          })
-                        .attr("x", function(d){
-              //            console.log(x_axis1(d.key));
-                          return x_axis1(d.key);
-                        })
-                        .attr("y", function(d){
-             //             console.log(y_axis(d.value));
-                          return y_axis(d.value);
-                        })
-                        .attr("width", x_axis1.bandwidth())
-                        .attr("height", function(d){
-                          console.log(height - y_axis(d.value));
-                          return height - y_axis(d.value);
-                        })
-                        .attr("fill", function(d){
-
-                          return rect_color(d.key);
-                        });
-
-      rect_selector.append("g")
-                   .attr("class", "axis")
-                   .attr("transform", "translate(0, "+ height +")")
-                   .call(d3.axisBottom(x_axis0));
-
-      rect_selector.append("g")
-                   .attr("class", "axis")
-                   .call(d3.axisLeft(y_axis).ticks(null, "s"))
-                   .append("text")
-                   .attr("x", 2)
-                   .attr("y", y_axis(y_axis.ticks().pop()) + 0.5)
-                   .attr("dy", "0.32em")
-                   .text("value");
-
-      var legend = rect_selector.append("g")
-                                .attr("class", "legend")
-                                .selectAll("g")
-                                .data(keys.slice().reverse())
-                                .enter().append("g")
-                                .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
-
-      legend.append("rect")
-            .attr("x", width - 100)
-            .attr("width", 23)
-            .attr("height", 23)
-            .attr("fill", rect_color);
-
-      legend.append("text")
-            .attr("x", width -120)
-            .attr("y", 9.5)
-            .attr("dy", "0.32em")
-            .text(function(d) { return d; });
-
-    });
+              console.log(s);
+});
 
     </script>
 

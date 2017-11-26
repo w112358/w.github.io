@@ -597,7 +597,9 @@
       t1 = t1.toLowerCase();
       var t2 = d3.select("#select_type").node().value;
       var t3 = d3.select("#requirement_detail").node().value;
+      t3 = +t3;
       var t4 = d3.select("#requirement_value").node().value;
+      t4 = +t4;
 
       select_draw(t1, t2, t3, t4);
       return false;
@@ -643,9 +645,10 @@
                   return d;
                 }
                 else if(input_type != "none" && input_requirement != "none"){
+
                   var t_or_f;
                   var distance = 5;
-                  switch(input_requirement, distance){
+                  switch(input_requirement){
                     case 1: t_or_f = Math.abs(d.hp - input_requirement_value) < distance; break;
                     case 2: t_or_f = Math.abs(d.attack - input_requirement_value) < distance; break;
                     case 3: t_or_f = Math.abs(d.defense - input_requirement_value) < distance; break;
@@ -654,19 +657,10 @@
                     case 6: t_or_f = Math.abs(d.speed - input_requirement_value) < distance; break;
                   };
 
-  /*                console.log(d.name);
-                  console.log(input_requirement);
-                  console.log(t_or_f);
-                  console.log(Math.abs(d.attack - input_requirement_value) < distance);
-                  console.log((d.type1 == input_type || d.type2 == input_type));
-                  console.log((d.type1 == input_type || d.type2 == input_type)&& t_or_f);
-*/
-                  if((d.type1 == input_type || d.type2 == input_type) && t_or_f){
+                  if(t_or_f && (d.type1 == input_type || d.type2 == input_type)){
+                    console.log(d);
                     return d;
                   };
-                }
-                else {
-                  return error;
 
                 }
               });
