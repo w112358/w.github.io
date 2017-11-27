@@ -96,7 +96,7 @@ header ul li a:hover{
 #main{
   margin: 0;
   width: cover;
-  height: 4100px;
+  height: 4200px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -240,7 +240,7 @@ footer{
 
 .arc text{
   font-size: 20px;
-  font-family: 'Aladin', cursive;
+  font-family: 'Signika', sans-serif;
   text-anchor: middle;
   fill: white;
 }
@@ -266,7 +266,7 @@ select:focus{
 }
 
 .select_label{
-  font-family: "Barlow Condensed";
+  font-family: 'Signika', sans-serif;
   font-size: 20px;
   color:white;
 
@@ -278,7 +278,7 @@ select:focus{
   text-align: left;
   color: white;
   font-size: 20px;
-  font-family: "Barlow Condensed";
+  font-family: 'Signika', sans-serif;
 }
 
 #requirement_value{
@@ -323,7 +323,7 @@ input[type=submit]:hover {
 
 .i_arc text{
   fill: white;
-  font-family: "Barlow Condensed";
+  font-family: 'Signika', sans-serif;
   font-size:15px;
   text-anchor: middle;
 }
@@ -360,7 +360,7 @@ input[type=submit]:hover {
 
 .legend{
   fill:white;
-  font-family: "Barlow Condensed";
+  font-family: 'Signika', sans-serif;
   font-size: 13px;
   text-anchor: end;
 }
@@ -371,7 +371,7 @@ input[type=submit]:hover {
   background-color: rgba(255, 255, 255, 0.8);
   color: #6b486b;
   font-size:20px;
-  font-family: "Barlow Condensed";
+  font-family: 'Signika', sans-serif;
   font-weight: 500;
   border-radius: 6px;
 }

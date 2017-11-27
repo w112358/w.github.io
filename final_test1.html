@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="final-style.css">
     <script src="d3-scale-radial.js"></script>
     <script src="d3-tip.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Audiowide|Aladin|Yellowtail|Barlow+Condensed" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Signika|Aladin|Yellowtail|Barlow+Condensed" rel="stylesheet">
     <title>Poke</title>
 
   </head>
@@ -111,7 +111,7 @@
       <div class = "main_space"></div>
 
       <div class = "main_part">
-        <div class = "main_title">Pokedex</div>
+        <div class = "main_title">Poke Selector</div>
 
         <div class = "main_text">
           <p>
@@ -468,8 +468,8 @@
            .attr("transform", function(d) { return (o_band(d.type) + o_band.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI ? "rotate(90)translate(0,16)" : "rotate(-90)translate(0,-9)"; })
            .text(function(d) { return d.type; })
            .attr("fill", "#fff")
-           .attr("font-family", "Barlow Condensed")
-           .attr("font-size", "20px");
+           .attr("font-family", "Signika")
+           .attr("font-size", "15px");
 
       var y_axis = tshape.append("g")
                          .attr("text-anchor", "end");
@@ -487,7 +487,7 @@
 
       y_tick.append("text")
             .text(o_radial.tickFormat(10, "s"))
-            .attr("font-family", "Barlow Condensed")
+            .attr("font-family", "Signika")
             .attr("x", 10)
             .attr("y", function(d) { return -o_radial(d); })
             .attr("dy", "0.25em")
@@ -504,18 +504,18 @@
                          .attr("transform", function(d, i) { return "translate(0," + i * 24 + ")"; });
 
       legend.append("rect")
-            .attr("x", 30)
+            .attr("x", 35)
             .attr("y", -30)
             .attr("width", 20)
             .attr("height", 20)
             .attr("fill", o_color);
 
       legend.append("text")
-            .attr("x", 12)
+            .attr("x", 25)
             .attr("y", -20)
             .attr("dy", "0.32em")
             .text(function(d) { return d; })
-            .attr("font-size", "20px");
+            .attr("font-size", "18px");
 
      function draw_i_shape(key){
           var i_shape =  tshape.selectAll(".i_arc")
