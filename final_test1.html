@@ -259,10 +259,10 @@
                         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
                         .domain(["hp", "attack", "defense", "sp_attack", "sp_defense", "speed"]);
 
-
+          var key1 = poke_gene.slice(1);
 
           var gene_shape = gene.selectAll(".arc")
-                               .data(pie(poke_gene));
+                               .data(pie(key1));
 
           var gene_enter = gene_shape.enter().append("g")
                                      .attr("class", "arc");
@@ -271,7 +271,14 @@
 
           gene_enter.append("path");
 
-          gene_enter.append("text");
+          gene_enter.append("text")
+                    .attr("class", "other");
+
+          gene_enter.append("text")
+                    .attr("class", "num");
+
+          gene_enter.append("text")
+                    .attr("class", "total_num");
 
           gene_shape = gene_shape.merge(gene_enter);
 
@@ -285,7 +292,7 @@
                       return color(d.data.label);
                     });
 
-          gene_shape.selectAll("text")
+          gene_shape.selectAll("text.other")
                     .data(d => [d])
                     .transition()
                     .duration(1800)
@@ -307,6 +314,30 @@
 
                       return d.data.label + ":" + Math.round(t);
                     });
+
+            gene_shape.selectAll("text.num")
+              //        .data(d => [d])
+                      .transition()
+                      .duration(1800)
+                      .text(function(d){
+                          var t;
+                          switch(generation){
+                            case 1: t = 151; break;
+                            case 2: t = 100; break;
+                            case 3: t = 135; break;
+                            case 4: t = 107; break;
+                            case 5: t = 156; break;
+                            case 6: t = 72; break;
+                            case 7: t = 80; break;
+                          }
+                          return t;
+                      });
+
+            gene_shape.selectAll("text.total_num")
+                      .transition()
+                      .duration(1800)
+                      .attr("transform", "translate(0, 30)")
+                      .text("Total Number");
 
 
         });
@@ -452,6 +483,7 @@
                        .attr("fill", function(d){
                           console.log(d.type);
                           console.log(t1);
+
 
                         })               */
                     });

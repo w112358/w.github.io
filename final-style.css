@@ -238,11 +238,27 @@ footer{
   stroke: none;
 }
 
-.arc text{
+.arc text.other{
   font-size: 20px;
   font-family: 'Signika', sans-serif;
   text-anchor: middle;
   fill: white;
+}
+
+.arc text.num{
+  font-size: 48px;
+  font-family: 'Signika', sans-serif;
+  text-anchor: middle;
+  fill: orangered;
+  opacity: 0.3;
+}
+
+.arc text.total_num{
+  font-size: 20px;
+  font-family: 'Signika', sans-serif;
+  text-anchor: middle;
+  fill: orangered;
+  opacity: 0.3;
 }
 
 input[type = text],select{
